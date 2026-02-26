@@ -162,6 +162,14 @@ Define image
 {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:{{ .Values.image.tags.major16.minor040 }}
 {{- end }}
 
+{{- define "postgresql.image.major17.minor050" -}}
+{{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:{{ .Values.image.tags.major17.minor050 }}
+{{- end }}
+
+{{- define "postgresql.image.major18.minor010" -}}
+{{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:{{ .Values.image.tags.major18.minor010 }}
+{{- end }}
+
 {{- define "pgbouncer.image" -}}
 {{ .Values.pgbouncer.image.registry | default (.Values.image.registry | default "docker.io") }}/{{ .Values.pgbouncer.image.repository }}:{{ .Values.pgbouncer.image.tag }}
 {{- end }}

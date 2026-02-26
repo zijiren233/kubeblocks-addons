@@ -292,3 +292,95 @@ spec:
         cmdExecutorConfig:
           image: {{ include "postgresql.image.major16.minor040" . }}
 {{- end -}}
+
+{{- $cvName = "postgresql-17.5.0" -}}
+{{ if eq (include "postgresql.isClusterVersionEnabled" (dict "cvName" $cvName "values" .Values)) "true" }}
+---
+apiVersion: apps.kubeblocks.io/v1alpha1
+kind: ClusterVersion
+metadata:
+  name: {{ $cvName }}
+  annotations:
+    kubeblocks.io/is-default-cluster-version: "false"
+  labels:
+   {{- include "postgresql.labels" . | nindent 4 }}
+spec:
+  clusterDefinitionRef: postgresql
+  componentVersions:
+    - componentDefRef: postgresql
+      configSpecs:
+        - name: postgresql-configuration
+          templateRef: postgresql17-configuration
+          constraintRef: postgresql17-cc
+          keys:
+            - postgresql.conf
+          namespace: {{ .Release.Namespace }}
+          volumeName: postgresql-config
+          defaultMode: 0777
+        - name: postgresql-custom-metrics
+          templateRef: postgresql17-custom-metrics
+          namespace: {{ .Release.Namespace }}
+          volumeName: postgresql-custom-metrics
+          defaultMode: 0777
+      versionsContext:
+        initContainers:
+          - name: pg-init-container
+            image: {{ include "postgresql.image.major17.minor050" . }}
+        containers:
+          - name: postgresql
+            image: {{ include "postgresql.image.major17.minor050" . }}
+          - name: pgbouncer
+            image: {{ include "pgbouncer.image" . }}
+      systemAccountSpec:
+        cmdExecutorConfig:
+          image: {{ include "postgresql.image.major17.minor050" . }}
+      switchoverSpec:
+        cmdExecutorConfig:
+          image: {{ include "postgresql.image.major17.minor050" . }}
+{{- end -}}
+
+{{- $cvName = "postgresql-18.1.0" -}}
+{{ if eq (include "postgresql.isClusterVersionEnabled" (dict "cvName" $cvName "values" .Values)) "true" }}
+---
+apiVersion: apps.kubeblocks.io/v1alpha1
+kind: ClusterVersion
+metadata:
+  name: {{ $cvName }}
+  annotations:
+    kubeblocks.io/is-default-cluster-version: "false"
+  labels:
+   {{- include "postgresql.labels" . | nindent 4 }}
+spec:
+  clusterDefinitionRef: postgresql
+  componentVersions:
+    - componentDefRef: postgresql
+      configSpecs:
+        - name: postgresql-configuration
+          templateRef: postgresql18-configuration
+          constraintRef: postgresql18-cc
+          keys:
+            - postgresql.conf
+          namespace: {{ .Release.Namespace }}
+          volumeName: postgresql-config
+          defaultMode: 0777
+        - name: postgresql-custom-metrics
+          templateRef: postgresql18-custom-metrics
+          namespace: {{ .Release.Namespace }}
+          volumeName: postgresql-custom-metrics
+          defaultMode: 0777
+      versionsContext:
+        initContainers:
+          - name: pg-init-container
+            image: {{ include "postgresql.image.major18.minor010" . }}
+        containers:
+          - name: postgresql
+            image: {{ include "postgresql.image.major18.minor010" . }}
+          - name: pgbouncer
+            image: {{ include "pgbouncer.image" . }}
+      systemAccountSpec:
+        cmdExecutorConfig:
+          image: {{ include "postgresql.image.major18.minor010" . }}
+      switchoverSpec:
+        cmdExecutorConfig:
+          image: {{ include "postgresql.image.major18.minor010" . }}
+{{- end -}}

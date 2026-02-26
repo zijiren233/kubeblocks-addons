@@ -135,6 +135,9 @@ spec:
             value: $(POSTGRES_USER)
           - name: PGPASSWORD
             value: $(POSTGRES_PASSWORD)
+
+          - name: CLUSTER_DOMAIN
+            value: {{ .Values.clusterDomain | quote }}
   runtime:
     securityContext:
       runAsUser: 0
@@ -247,6 +250,9 @@ spec:
             value: $(POSTGRES_USER)
           - name: PGPASSWORD
             value: $(POSTGRES_PASSWORD)
+
+          - name: CLUSTER_DOMAIN
+            value: {{ .Values.clusterDomain | quote }}
       - name: pgbouncer
         image: {{ include "pgbouncer.image" . }}
         imagePullPolicy: {{ .Values.pgbouncer.image.pullPolicy | quote }}

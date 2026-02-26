@@ -26,6 +26,10 @@ image:
       minor070: 15.7.0
     major16:
       minor040: 16.4.0
+    major17:
+      minor050: 17.5
+    major18:
+      minor010: 18.1
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -139,3 +143,6 @@ logConfigs:
 ##   --set enabledClusterVersions={}   # this will disable all cluster versions, the enabledClusterVersions has an empty
 ##                                     # value and the length is 1
 enabledClusterVersions: [ ]
+
+## @param clusterDomain define the kubernetes cluster domain
+clusterDomain: "cluster.local"

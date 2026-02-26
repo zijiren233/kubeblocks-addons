@@ -9,22 +9,38 @@ spec:
     - compDefs:
         - {{ include "mongodb.componentDefName" . }}
       releases:
+        - 8.0.17
         - 8.0.4
+        - 7.0.28
         - 7.0.16
         - 7.0.12
+        - 6.0.27
         - 6.0.20
         - 6.0.16
         - 5.0.30
+        - 5.0.29
         - 5.0.28
         - 4.4.29
         - 4.2.24
         - 4.0.28
   releases:
+    - name: 8.0.17
+      changes:
+      serviceVersion: 8.0.17
+      images:
+        mongodb: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:8.0.17
+        init-syncer: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.syncer.repository }}:{{ .Values.image.syncer.tag }}
     - name: 8.0.4
       changes:
       serviceVersion: 8.0.4
       images:
         mongodb: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:8.0.4
+        init-syncer: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.syncer.repository }}:{{ .Values.image.syncer.tag }}
+    - name: 7.0.28
+      changes:
+      serviceVersion: 7.0.28
+      images:
+        mongodb: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:7.0.28
         init-syncer: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.syncer.repository }}:{{ .Values.image.syncer.tag }}
     - name: 7.0.16
       changes:
@@ -37,6 +53,12 @@ spec:
       serviceVersion: 7.0.12
       images:
         mongodb: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:7.0.12
+        init-syncer: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.syncer.repository }}:{{ .Values.image.syncer.tag }}
+    - name: 6.0.27
+      changes:
+      serviceVersion: 6.0.27
+      images:
+        mongodb: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:6.0.27
         init-syncer: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.syncer.repository }}:{{ .Values.image.syncer.tag }}
     - name: 6.0.20
       changes:
@@ -55,6 +77,12 @@ spec:
       serviceVersion: 5.0.30
       images:
         mongodb: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:5.0.30
+        init-syncer: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.syncer.repository }}:{{ .Values.image.syncer.tag }}
+    - name: 5.0.29
+      changes:
+      serviceVersion: 5.0.29
+      images:
+        mongodb: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.repository }}:5.0.29
         init-syncer: {{ .Values.image.registry | default "docker.io" }}/{{ .Values.image.syncer.repository }}:{{ .Values.image.syncer.tag }}
     - name: 5.0.28
       changes:
